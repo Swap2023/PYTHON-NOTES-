@@ -1,0 +1,38 @@
+inner - works on common indexes/columns/elements only
+outer - works on all indexes/columns/elements
+left - works on left DF
+right - works on right DF
+
+Join 
+- Column names must be different to join DFs
+- DF1.join(DF2, how='inner/outer/left/right')
+A.join(B) - Operates on all indexes of A only - left join default
+A.join(B,how='left') - Operates on all indexes of A only
+A.join(B,how='right') - Operates on all indexes of B only
+A.join(B,how='inner') - Operates on common indexes only
+A.join(B,how='outer') - Operates on all indexes of A & B
+A.join([B,C]) - Operates on all indexes of A only
+A.join([B,C], how='inner) - Operates on common indexes only
+A.join([B,C], how='outer') - Operates on all indexes of A,B & C
+
+Concat
+- pd.concat([DF1,DF2], axis=0/1, join='inner/outer')
+- In concat(with rows axis) - Rows below Rows without merge/sort and Columns will merge/sort
+- In concat(with columns axis1) - Columns side by side without merge/sort and Rows will merge/sort
+pd.concat([A,B]) - Rows below rows without merge and Columns will merge after sorting - outer join default
+pd.concat([A,B], join='outer') - Rows below rows without merge and Columns will merge/sort
+pd.concat([A,B], join='inner') - Rows below rows without merge and operates on common columns only
+pd.concat([A,B], axis=1) - Columns side by side without merge and Rows will merge/sort
+pd.concat([A,B], axis=1, join='outer') - Columns side by side without merge and Rows will merge/sort
+pd.concat([A,B], axis=1, join='inner') - Columns side by side without merge and operates on common rows only
+
+Merge
+- Column Heading must be same & is used
+- pd.merge(DF1,DF2, on='col_name', how='inner/outer/left/right')
+pd.merge(A1,A2) - Produces result after operation on common elements only - inner join default
+pd.merge(A1,A2, how='inner) - Produces result after operation on common elements only
+pd.merge(A1,A2, how='outer') - Produces result after operation on all elements of both DFs
+pd.merge(A1,A2, how='left') - Operates on all elements of A1 and common elements
+pd.merge(A1,A2, how='right') - Operates on all elements of A2 and common elements
+- Merging with different column names
+pd.merge(A1,A4, left_on='A1_colname', right_on='A2_colname', how=inner/outer)
